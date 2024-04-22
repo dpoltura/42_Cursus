@@ -6,14 +6,17 @@
 #    By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 09:56:05 by dpoltura          #+#    #+#              #
-#    Updated: 2024/02/27 09:59:11 by dpoltura         ###   ########.fr        #
+#    Updated: 2024/04/22 15:45:01 by dpoltura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
 
-SRCS =	philo.c
+SRCS =	philo.c \
+		utils.c \
+		init_table.c \
+		free.c
 
 OBJS = $(SRCS:%.c=%.o)
 
