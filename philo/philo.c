@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:46:49 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/22 15:50:40 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:54:50 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	print_philos(t_philos *philos)
 		printf("philos->time_to_eat: %d\n", philos->time_to_eat);
 		printf("philos->time_to_sleep: %d\n", philos->time_to_sleep);
 		printf("philos->last_meal: %d\n", philos->last_meal);
-		printf("philos->philo_nb: %d\n", philos->philo_nb);
+		printf("philos->philo_nb: "ANSI_BOLDGREEN_HI"%d"ANSI_RESET"\n", philos->philo_nb);
 		printf("\n");
 		philos = philos->next;
 	}

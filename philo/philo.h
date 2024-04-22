@@ -6,13 +6,14 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:40:56 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/22 15:48:19 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/22 15:53:11 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include "colors.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
