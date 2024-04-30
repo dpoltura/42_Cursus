@@ -6,12 +6,12 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:46:49 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 11:24:00 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 14:26:57 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
+/*
 static void	print_args(t_args *args)
 {
 	printf("table->args:\n");
@@ -21,9 +21,12 @@ static void	print_args(t_args *args)
 	printf("args->time_to_sleep: %d\n", args->time_to_sleep);
 }
 
-static void	print_philos(t_philos *philos)
+static void	print_philos(t_args *args, t_philos *philos)
 {
-	while (philos)
+	int	i;
+
+	i = 0;
+	while (i < args->nb_of_philos)
 	{
 		printf("table->philos:\n");
 		printf("philos->time_to_die: %ld\n", philos->time_to_die);
@@ -34,6 +37,7 @@ static void	print_philos(t_philos *philos)
 		printf("philos->thread: %lu\n", philos->thread);
 		printf("\n");
 		philos = philos->next;
+		i++;
 	}
 }
 
@@ -42,9 +46,9 @@ static void	print_table(t_table *table)
 	printf("\n");
 	print_args(table->args);
 	printf("\n");
-	print_philos(table->philos);
+	print_philos(table->args, table->philos);
 }
-
+*/
 int	main(int argc, char **argv)
 {
 	t_table	*table;
@@ -55,8 +59,7 @@ int	main(int argc, char **argv)
 	if (!init_table(&table, argv))
 		return (1);
 	create_thread(table);
-	
-	print_table(table);
+	//print_table(table);
 	free_table(&table);
 	return (0);
 }

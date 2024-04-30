@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:40:56 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 11:39:16 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:52:55 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_philos
 	time_t	last_meal;
 	int	philo_nb;
 	pthread_t	thread;
+	pthread_mutex_t	l_fork_mutex;
+	pthread_mutex_t r_fork_mutex;
 	struct s_philos	*prev;
 	struct s_philos	*next;
 }	t_philos;
@@ -44,7 +46,7 @@ typedef struct s_philos
 typedef struct	s_table
 {
 	struct timeval	time_of_day;
-	pthread_mutex_t	mutex;
+	int		end;
 	t_args	*args;
 	t_philos	*philos;
 }	t_table;
@@ -55,4 +57,3 @@ void	free_table(t_table **table);
 void	create_thread(t_table *table);
 
 #endif
-

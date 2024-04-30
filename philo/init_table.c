@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:11:37 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 11:01:05 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:53:52 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	init_args(t_args **args, char **argv)
 static int	init_philos(t_table **table)
 {
 	t_philos	*cursor;
+	t_philos	*tmp;
 	int	i;
 	int	j;
 	
@@ -37,7 +38,6 @@ static int	init_philos(t_table **table)
 	i = 0;
 	j = (*table)->args->nb_of_philos;
 	gettimeofday(&(*table)->time_of_day, NULL);
-	pthread_mutex_init(&(*table)->mutex, NULL);
 	while (i < j)
 	{
 		cursor->table = *table;
@@ -47,16 +47,40 @@ static int	init_philos(t_table **table)
 		cursor->last_meal = 0;
 		cursor->philo_nb = i + 1;
 		cursor->thread = 0;
-		cursor->prev = NULL;
+		if (i == 0)
+			cursor->prev = NULL;
+		else
+			cursor->prev = tmp;
 		if ((i + 1) < j)
 		{
 			cursor->next = malloc(sizeof(t_philos));
 			if (!cursor->next)
 				return (0);
+			tmp = cursor;
 			cursor = cursor->next;
 		}
 		else
-			cursor->next = NULL;
+		{
+			(*table)->philos->prev = cursor;
+			cursor->next = (*table)->philos;
+		}
+		i++;
+	}
+	return (1);
+}
+
+static int	init_mutex(t_table **table)
+{
+	t_philos	*cursor;
+	int	i;
+
+	cursor = (*table)->philos;
+	i = 0;
+	while (i < (*table)->args->nb_of_philos)
+	{
+		pthread_mutex_init(&cursor->l_fork_mutex, NULL);
+		cursor->prev->r_fork_mutex = cursor->l_fork_mutex;	
+		cursor = cursor->next;
 		i++;
 	}
 	return (1);
@@ -67,9 +91,11 @@ int	init_table(t_table **table, char **argv)
 	*table = malloc(sizeof(t_table));
 	if (!(*table))
 		return (0);
+	(*table)->end = 0;
 	if (!init_args(&(*table)->args, argv))
 		return (0);
 	if (!init_philos(table))
 		return (0);
+	init_mutex(table);
 	return (1);
 }
