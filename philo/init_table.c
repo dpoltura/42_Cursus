@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:11:37 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 13:53:52 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 16:07:54 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static int	init_args(t_args **args, char **argv)
 	if (!(*args))
 		return (0);
 	(*args)->nb_of_philos = ft_atoi(argv[1]);
-	(*args)->time_to_die = ft_atoi(argv[2]);
-	(*args)->time_to_eat = ft_atoi(argv[3]);
-	(*args)->time_to_sleep = ft_atoi(argv[4]);
+	(*args)->time_to_die = ft_atoi(argv[2]) * 1000;
+	(*args)->time_to_eat = ft_atoi(argv[3]) * 1000;
+	(*args)->time_to_sleep = ft_atoi(argv[4]) * 1000;
 	return (1);
 }
 

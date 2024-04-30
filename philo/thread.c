@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:13:30 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 15:29:01 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 17:10:18 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	philo_is_die(t_philos *tmp)
 	pthread_mutex_lock(&tmp->r_fork_mutex);
 	pthread_mutex_lock(&tmp->next->l_fork_mutex);
 	gettimeofday(&time, NULL);
-	if (time.tv_sec - tmp->table->time_of_day.tv_sec > tmp->time_to_die)
+	if ((time.tv_sec - tmp->table->time_of_day.tv_sec) * 1000000 > tmp->time_to_die)
 	{
 		printf("philo %d is died\n", tmp->philo_nb);
 		tmp->table->end = 1;
@@ -40,7 +40,7 @@ static void	philo_is_eating(t_philos *tmp)
 	pthread_mutex_lock(&tmp->r_fork_mutex);
 	pthread_mutex_lock(&tmp->next->l_fork_mutex);
 	printf("philo %d is eating\n", tmp->philo_nb);
-	usleep(tmp->time_to_eat * 1000);
+	usleep(tmp->time_to_eat);
 	pthread_mutex_unlock(&tmp->l_fork_mutex);
 	pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
 	pthread_mutex_unlock(&tmp->r_fork_mutex);
@@ -49,29 +49,13 @@ static void	philo_is_eating(t_philos *tmp)
 
 static void	philo_is_sleeping(t_philos *tmp)
 {
-	pthread_mutex_lock(&tmp->l_fork_mutex);
-	pthread_mutex_lock(&tmp->prev->r_fork_mutex);
-	pthread_mutex_lock(&tmp->r_fork_mutex);
-	pthread_mutex_lock(&tmp->next->l_fork_mutex);
 	printf("philo %d is sleeping\n", tmp->philo_nb);
-	pthread_mutex_unlock(&tmp->l_fork_mutex);
-	pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
-	pthread_mutex_unlock(&tmp->r_fork_mutex);
-	pthread_mutex_unlock(&tmp->next->l_fork_mutex);
-	usleep(tmp->time_to_sleep * 1000);
+	usleep(tmp->time_to_sleep);
 }
 
 static void	philo_is_thinking(t_philos *tmp)
 {
-	pthread_mutex_lock(&tmp->l_fork_mutex);
-	pthread_mutex_lock(&tmp->prev->r_fork_mutex);
-	pthread_mutex_lock(&tmp->r_fork_mutex);
-	pthread_mutex_lock(&tmp->next->l_fork_mutex);
 	printf("philo %d is thinking\n", tmp->philo_nb);
-	pthread_mutex_unlock(&tmp->l_fork_mutex);
-	pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
-	pthread_mutex_unlock(&tmp->r_fork_mutex);
-	pthread_mutex_unlock(&tmp->next->l_fork_mutex);
 }
 
 static void	*routine(void *cursor)
