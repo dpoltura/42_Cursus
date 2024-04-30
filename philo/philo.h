@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:40:56 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 09:44:23 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:39:16 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/time.h>
+# include <unistd.h>
 
 typedef struct	s_args
 {
@@ -28,10 +30,11 @@ typedef struct	s_args
 
 typedef struct s_philos
 {
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	last_meal;
+	struct s_table	*table;
+	time_t	time_to_die;
+	time_t	time_to_eat;
+	time_t	time_to_sleep;
+	time_t	last_meal;
 	int	philo_nb;
 	pthread_t	thread;
 	struct s_philos	*prev;
@@ -40,6 +43,7 @@ typedef struct s_philos
 
 typedef struct	s_table
 {
+	struct timeval	time_of_day;
 	pthread_mutex_t	mutex;
 	t_args	*args;
 	t_philos	*philos;

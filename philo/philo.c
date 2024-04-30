@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:46:49 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 09:44:35 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:24:00 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ static void	print_philos(t_philos *philos)
 	while (philos)
 	{
 		printf("table->philos:\n");
-		printf("philos->time_to_die: %d\n", philos->time_to_die);
-		printf("philos->time_to_eat: %d\n", philos->time_to_eat);
-		printf("philos->time_to_sleep: %d\n", philos->time_to_sleep);
-		printf("philos->last_meal: %d\n", philos->last_meal);
+		printf("philos->time_to_die: %ld\n", philos->time_to_die);
+		printf("philos->time_to_eat: %ld\n", philos->time_to_eat);
+		printf("philos->time_to_sleep: %ld\n", philos->time_to_sleep);
+		printf("philos->last_meal: %ld\n", philos->last_meal);
 		printf("philos->philo_nb: "ANSI_BOLDGREEN_HI"%d"ANSI_RESET"\n", philos->philo_nb);
 		printf("philos->thread: %lu\n", philos->thread);
 		printf("\n");

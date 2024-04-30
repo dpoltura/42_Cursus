@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:11:37 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 09:27:52 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 11:01:05 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ static int	init_philos(t_table **table)
 	cursor = (*table)->philos;
 	i = 0;
 	j = (*table)->args->nb_of_philos;
+	gettimeofday(&(*table)->time_of_day, NULL);
 	pthread_mutex_init(&(*table)->mutex, NULL);
 	while (i < j)
 	{
+		cursor->table = *table;
 		cursor->time_to_die = (*table)->args->time_to_die;
 		cursor->time_to_eat = (*table)->args->time_to_eat;
 		cursor->time_to_sleep = (*table)->args->time_to_sleep;
