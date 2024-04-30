@@ -6,7 +6,7 @@
 #    By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/27 09:56:05 by dpoltura          #+#    #+#              #
-#    Updated: 2024/04/22 15:45:01 by dpoltura         ###   ########.fr        #
+#    Updated: 2024/04/22 16:13:46 by dpoltura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CFLAGS = -Wall -Werror -Wextra -g
 SRCS =	philo.c \
 		utils.c \
 		init_table.c \
-		free.c
+		free.c \
+		thread.c
 
 OBJS = $(SRCS:%.c=%.o)
 

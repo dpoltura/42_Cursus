@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:40:56 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/22 15:53:11 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/04/30 09:44:23 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ typedef struct s_philos
 	int	time_to_sleep;
 	int	last_meal;
 	int	philo_nb;
+	pthread_t	thread;
 	struct s_philos	*prev;
 	struct s_philos	*next;
 }	t_philos;
 
 typedef struct	s_table
 {
+	pthread_mutex_t	mutex;
 	t_args	*args;
 	t_philos	*philos;
 }	t_table;
@@ -46,6 +48,7 @@ typedef struct	s_table
 int     ft_atoi(const char *nptr);
 int	init_table(t_table **table, char **argv);
 void	free_table(t_table **table);
+void	create_thread(t_table *table);
 
 #endif
 
