@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:13:30 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/02 11:03:25 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/02 11:56:59 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ static int	philo_is_die(t_philos *tmp)
 }
 static void	philo_is_eating(t_philos *tmp)
 {
+	if (!philo_is_die(tmp) || tmp->table->end == 1)
+	{
+		pthread_detach(tmp->thread);
+		return ;
+	}
 	pthread_mutex_lock(&tmp->l_fork_mutex);
 	pthread_mutex_lock(&tmp->prev->r_fork_mutex);
 	pthread_mutex_lock(&tmp->r_fork_mutex);
@@ -63,6 +68,11 @@ static void	philo_is_eating(t_philos *tmp)
 
 static void	philo_is_sleeping(t_philos *tmp)
 {
+	if (!philo_is_die(tmp) || tmp->table->end == 1)
+	{
+		pthread_detach(tmp->thread);
+		return ;
+	}
 	pthread_mutex_lock(&tmp->table->print_mutex);
 	printf("philo %d is "ANSI_BOLDYELLOW_HI"sleeping\n"ANSI_RESET, tmp->philo_nb);
 	pthread_mutex_unlock(&tmp->table->print_mutex);
@@ -73,6 +83,11 @@ static void	philo_is_sleeping(t_philos *tmp)
 
 static void	philo_is_thinking(t_philos *tmp)
 {
+	if (!philo_is_die(tmp) || tmp->table->end == 1)
+	{
+		pthread_detach(tmp->thread);
+		return ;
+	}
 	pthread_mutex_lock(&tmp->table->print_mutex);
 	printf("philo %d is "ANSI_BOLDBLUE_HI"thinking\n"ANSI_RESET, tmp->philo_nb);
 	pthread_mutex_unlock(&tmp->table->print_mutex);
@@ -83,14 +98,23 @@ static void	*routine(void *cursor)
 	t_philos	*tmp;
 
 	tmp = cursor;
-	if (!philo_is_die(tmp))
+	if (!philo_is_die(tmp) || tmp->table->end == 1)
+	{
+		pthread_detach(tmp->thread);
 		return (NULL);
+	}
 	philo_is_eating(tmp);
-	if (!philo_is_die(tmp))
+	if (!philo_is_die(tmp) || tmp->table->end == 1)
+	{
+		pthread_detach(tmp->thread);
 		return (NULL);
+	}
 	philo_is_sleeping(tmp);
-	if (!philo_is_die(tmp))
+	if (!philo_is_die(tmp) || tmp->table->end == 1)
+	{
+		pthread_detach(tmp->thread);
 		return (NULL);
+	}
 	philo_is_thinking(tmp);
 	return (NULL);
 }
@@ -109,6 +133,11 @@ void	create_thread(t_table *table)
 			pthread_create(&cursor->thread, NULL, &routine, cursor);
 			cursor = cursor->next;
 			i++;
+		}
+		if (table->end == 1)
+		{
+			pthread_detach(cursor->thread);
+			return ;
 		}
 		cursor = table->philos;
 		i = 0;
