@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:11:37 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/02 10:24:46 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:04:46 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	init_philos(t_table **table)
 	j = (*table)->args->nb_of_philos;
 	gettimeofday(&(*table)->time_of_day, NULL);
 	(*table)->end = 0;
+	(*table)->end_thread = 0;
 	while (i < j)
 	{
 		cursor->table = *table;

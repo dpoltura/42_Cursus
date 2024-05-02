@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:40:56 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/02 10:22:23 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/02 12:04:24 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct	s_table
 {
 	struct timeval	time_of_day;
 	int		end;
+	pthread_t	end_thread;
 	t_args	*args;
 	t_philos	*philos;
 	pthread_mutex_t	print_mutex;
