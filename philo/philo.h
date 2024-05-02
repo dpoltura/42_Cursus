@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:40:56 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 13:52:55 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:22:23 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct	s_table
 	int		end;
 	t_args	*args;
 	t_philos	*philos;
+	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	var_mutex;
 }	t_table;
 
 int     ft_atoi(const char *nptr);

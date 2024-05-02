@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:11:37 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/04/30 16:07:54 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/02 10:24:46 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ static int	init_philos(t_table **table)
 	i = 0;
 	j = (*table)->args->nb_of_philos;
 	gettimeofday(&(*table)->time_of_day, NULL);
+	(*table)->end = 0;
 	while (i < j)
 	{
 		cursor->table = *table;
@@ -75,6 +76,8 @@ static int	init_mutex(t_table **table)
 	int	i;
 
 	cursor = (*table)->philos;
+	pthread_mutex_init(&(*table)->print_mutex, NULL);
+	pthread_mutex_init(&(*table)->var_mutex, NULL);
 	i = 0;
 	while (i < (*table)->args->nb_of_philos)
 	{
