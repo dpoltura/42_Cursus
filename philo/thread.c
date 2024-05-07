@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:13:30 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/02 12:06:53 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/07 09:11:02 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,28 +21,50 @@ static int	philo_is_die(t_philos *tmp)
 	pthread_mutex_lock(&tmp->r_fork_mutex);
 	pthread_mutex_lock(&tmp->next->l_fork_mutex);
 	gettimeofday(&time, NULL);
-	if ((time.tv_sec - tmp->table->time_of_day.tv_sec) * 1000000 > tmp->time_to_die)
+	pthread_mutex_lock(&tmp->table->var_mutex);
+	if (!tmp->last_meal)
 	{
-		pthread_mutex_unlock(&tmp->l_fork_mutex);
-		pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
-		pthread_mutex_unlock(&tmp->r_fork_mutex);
-		pthread_mutex_unlock(&tmp->next->l_fork_mutex);
-		pthread_mutex_lock(&tmp->table->print_mutex);
-		printf("philo %d "ANSI_BOLDRED_HI"died\n"ANSI_RESET, tmp->philo_nb);
-		pthread_mutex_unlock(&tmp->table->print_mutex);
-		pthread_mutex_lock(&tmp->table->var_mutex);
-		tmp->table->end = 1;
-		pthread_mutex_unlock(&tmp->table->var_mutex);
-		return (0);
+		if ((time.tv_sec - tmp->table->time_of_day.tv_sec) * 1000000 > tmp->time_to_die)
+		{
+			pthread_mutex_unlock(&tmp->l_fork_mutex);
+			pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
+			pthread_mutex_unlock(&tmp->r_fork_mutex);
+			pthread_mutex_unlock(&tmp->next->l_fork_mutex);
+			pthread_mutex_lock(&tmp->table->print_mutex);
+			printf("philo %d "ANSI_BOLDRED_HI"died\n"ANSI_RESET, tmp->philo_nb);
+			pthread_mutex_unlock(&tmp->table->print_mutex);
+			tmp->table->end = 1;
+			pthread_mutex_unlock(&tmp->table->var_mutex);
+			return (0);
+		}
+	}
+	else
+	{
+		if ((time.tv_sec - tmp->last_meal) * 1000000 > tmp->time_to_die)
+		{
+			pthread_mutex_unlock(&tmp->l_fork_mutex);
+			pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
+			pthread_mutex_unlock(&tmp->r_fork_mutex);
+			pthread_mutex_unlock(&tmp->next->l_fork_mutex);
+			pthread_mutex_lock(&tmp->table->print_mutex);
+			printf("philo %d "ANSI_BOLDRED_HI"died\n"ANSI_RESET, tmp->philo_nb);
+			pthread_mutex_unlock(&tmp->table->print_mutex);
+			tmp->table->end = 1;
+			pthread_mutex_unlock(&tmp->table->var_mutex);
+			return (0);
+		}
 	}
 	pthread_mutex_unlock(&tmp->l_fork_mutex);
 	pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
 	pthread_mutex_unlock(&tmp->r_fork_mutex);
 	pthread_mutex_unlock(&tmp->next->l_fork_mutex);
+	pthread_mutex_unlock(&tmp->table->var_mutex);
 	return (1);
 }
 static void	philo_is_eating(t_philos *tmp)
 {
+	struct timeval	time;
+	
 	pthread_mutex_lock(&tmp->l_fork_mutex);
 	pthread_mutex_lock(&tmp->prev->r_fork_mutex);
 	pthread_mutex_lock(&tmp->r_fork_mutex);
@@ -52,6 +74,8 @@ static void	philo_is_eating(t_philos *tmp)
 	pthread_mutex_unlock(&tmp->table->print_mutex);
 	pthread_mutex_lock(&tmp->table->var_mutex);
 	usleep(tmp->time_to_eat);
+	gettimeofday(&time, NULL);
+	tmp->last_meal = time.tv_sec;
 	pthread_mutex_unlock(&tmp->table->var_mutex);
 	pthread_mutex_unlock(&tmp->l_fork_mutex);
 	pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
@@ -84,10 +108,10 @@ static void	*routine(void *cursor)
 	if (!philo_is_die(tmp) || tmp->table->end == 1)
 		return (NULL);
 	philo_is_eating(tmp);
-	if (!philo_is_die(tmp))
+	if (!philo_is_die(tmp) || tmp->table->end == 1)
 		return (NULL);
 	philo_is_sleeping(tmp);
-	if (!philo_is_die(tmp))
+	if (!philo_is_die(tmp) || tmp->table->end == 1)
 		return (NULL);
 	philo_is_thinking(tmp);
 	return (NULL);
