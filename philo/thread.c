@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:13:30 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/15 11:25:24 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:33:22 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ static void	*routine(void *cursor)
     t_philos	*tmp;
 
     tmp = cursor;
+	if (tmp->philo_nb % 2 == 0)
+		usleep(100);
     while (1)
 	{
         pthread_mutex_lock(&tmp->table->var_mutex);
