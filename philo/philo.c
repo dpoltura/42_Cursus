@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:46:49 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/15 09:26:02 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:14:27 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	{
 		usleep(table->args->time_to_die);
 		gettimeofday(&time, NULL);
-		printf("%ld %d died\n", time.tv_usec / 1000, table->philos->philo_nb);
+		printf("%d %d died\n", table->args->time_to_die / 1000, table->philos->philo_nb);
 		free_table(&table);
 		return (1);
 	}
