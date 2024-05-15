@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:13:30 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/15 10:02:04 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:58:02 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static void	*eaten_enough(void *cursor)
 
 	tmp = cursor;
 	nb_of_meals = 0;
+	if (tmp->nb_of_meals == -1)
+		return (NULL);
 	while (tmp->philo_nb != 1)
 		tmp = tmp->prev;
 	while (1)
@@ -162,7 +164,7 @@ void	create_thread(t_table *table)
 		}
 		cursor = table->philos;
 		i = 0;
-		while (i < table->args->nb_of_philos && table->end == 0)
+		while (i < table->args->nb_of_philos)
 		{
 			pthread_join(cursor->thread, NULL);
 			cursor = cursor->next;

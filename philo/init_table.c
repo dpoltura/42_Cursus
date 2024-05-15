@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:11:37 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/15 10:14:49 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:22:48 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int	init_args(t_args **args, char **argv)
 		return (0);
 	if (argv[5])
 		(*args)->nb_of_meals = ft_atoi(argv[5]);
+	else if (!argv[5])
+		(*args)->nb_of_meals = -1;
 	return (1);
 }
 
