@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 16:13:30 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/15 10:58:02 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/15 11:25:24 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ static void	philo_is_eating(t_philos *tmp)
 	pthread_mutex_lock(&tmp->prev->r_fork_mutex);
 	pthread_mutex_lock(&tmp->r_fork_mutex);
 	pthread_mutex_lock(&tmp->next->l_fork_mutex);
+	pthread_mutex_lock(&tmp->table->var_mutex);
+	tmp->nb_of_meals--;
+	tmp->last_meal = time.tv_usec;
+	pthread_mutex_unlock(&tmp->table->var_mutex);
 	pthread_mutex_lock(&tmp->table->print_mutex);
 	if (tmp->table->end == 0)
 		printf("%ld %d is eating\n", time.tv_usec / 1000, tmp->philo_nb);
@@ -91,10 +95,6 @@ static void	philo_is_eating(t_philos *tmp)
 	pthread_mutex_unlock(&tmp->prev->r_fork_mutex);
 	pthread_mutex_unlock(&tmp->r_fork_mutex);
 	pthread_mutex_unlock(&tmp->next->l_fork_mutex);
-	pthread_mutex_lock(&tmp->table->var_mutex);
-	tmp->nb_of_meals--;
-	tmp->last_meal = time.tv_usec;
-	pthread_mutex_unlock(&tmp->table->var_mutex);
 }
 
 static void	philo_is_sleeping(t_philos *tmp)
@@ -164,7 +164,7 @@ void	create_thread(t_table *table)
 		}
 		cursor = table->philos;
 		i = 0;
-		while (i < table->args->nb_of_philos)
+		while (i < table->args->nb_of_philos && table->end == 0)
 		{
 			pthread_join(cursor->thread, NULL);
 			cursor = cursor->next;
