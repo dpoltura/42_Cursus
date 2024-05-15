@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 09:40:56 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/02 12:04:24 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:02:26 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct	s_args
 	int	time_to_die;
 	int	time_to_eat;
 	int	time_to_sleep;
+	int	nb_of_meals;
 }	t_args;
 
 typedef struct s_philos
@@ -34,6 +35,7 @@ typedef struct s_philos
 	time_t	time_to_die;
 	time_t	time_to_eat;
 	time_t	time_to_sleep;
+	int	nb_of_meals;
 	time_t	last_meal;
 	int	philo_nb;
 	pthread_t	thread;
@@ -48,6 +50,7 @@ typedef struct	s_table
 	struct timeval	time_of_day;
 	int		end;
 	pthread_t	end_thread;
+	pthread_t	meal_thread;
 	t_args	*args;
 	t_philos	*philos;
 	pthread_mutex_t	print_mutex;

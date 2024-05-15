@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 15:11:37 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/02 12:04:46 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/05/15 10:06:51 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,23 @@ static int	init_args(t_args **args, char **argv)
 	if (!(*args))
 		return (0);
 	(*args)->nb_of_philos = ft_atoi(argv[1]);
+	if (!(*args)->nb_of_philos)
+		return (0);
 	(*args)->time_to_die = ft_atoi(argv[2]) * 1000;
+	if (!(*args)->time_to_die)
+		return (0);
 	(*args)->time_to_eat = ft_atoi(argv[3]) * 1000;
+	if (!(*args)->time_to_eat)
+		return (0);
 	(*args)->time_to_sleep = ft_atoi(argv[4]) * 1000;
+	if (!(*args)->time_to_sleep)
+		return (0);
+	if (argv[5])
+		(*args)->nb_of_meals = ft_atoi(argv[5]);
+	else
+		(*args)->nb_of_meals = 0;
+	if (!(*args)->nb_of_meals)
+		return (0);
 	return (1);
 }
 
@@ -40,12 +54,14 @@ static int	init_philos(t_table **table)
 	gettimeofday(&(*table)->time_of_day, NULL);
 	(*table)->end = 0;
 	(*table)->end_thread = 0;
+	(*table)->meal_thread = 0;
 	while (i < j)
 	{
 		cursor->table = *table;
 		cursor->time_to_die = (*table)->args->time_to_die;
 		cursor->time_to_eat = (*table)->args->time_to_eat;
 		cursor->time_to_sleep = (*table)->args->time_to_sleep;
+		cursor->nb_of_meals = (*table)->args->nb_of_meals;
 		cursor->last_meal = 0;
 		cursor->philo_nb = i + 1;
 		cursor->thread = 0;
@@ -83,7 +99,7 @@ static int	init_mutex(t_table **table)
 	while (i < (*table)->args->nb_of_philos)
 	{
 		pthread_mutex_init(&cursor->l_fork_mutex, NULL);
-		cursor->prev->r_fork_mutex = cursor->l_fork_mutex;	
+		pthread_mutex_init(&cursor->r_fork_mutex, NULL);
 		cursor = cursor->next;
 		i++;
 	}
