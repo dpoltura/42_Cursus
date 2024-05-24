@@ -5,19 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/27 09:56:05 by dpoltura          #+#    #+#              #
-#    Updated: 2024/04/22 16:13:46 by dpoltura         ###   ########.fr        #
+#    Created: 2023/12/21 17:44:47 by kprigent          #+#    #+#              #
+#    Updated: 2024/05/24 12:51:46 by dpoltura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-CFLAGS = -Wall -Werror -Wextra -g
+NAME = philo
 
-SRCS =	philo.c \
+SRCS =	main.c \
+		death.c \
+		init.c \
+		eating.c \
+		parse.c \
 		utils.c \
-		init_table.c \
-		free.c \
-		thread.c
+		threads.c
 
 OBJS = $(SRCS:%.c=%.o)
 
@@ -37,5 +38,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-.PHONY: all clean fclean re

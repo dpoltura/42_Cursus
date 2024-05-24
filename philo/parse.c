@@ -1,36 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/27 09:46:49 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/05/15 10:14:27 by dpoltura         ###   ########.fr       */
+/*   Created: 2024/05/16 15:58:39 by ppitzini          #+#    #+#             */
+/*   Updated: 2024/05/23 16:23:40 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+static int	is_not_digit(char **argv)
 {
-	t_table	*table;
-	struct timeval	time;
+	int	i;
+	int	j;
 
-	table = NULL;
-	if (argc < 5 || argc > 6)
-		return (1);
-	if (!init_table(&table, argv))
-		return (1);
-	if (table->args->nb_of_philos == 1)
+	i = 1;
+	while (argv[i])
 	{
-		usleep(table->args->time_to_die);
-		gettimeofday(&time, NULL);
-		printf("%d %d died\n", table->args->time_to_die / 1000, table->philos->philo_nb);
-		free_table(&table);
+		if (ft_atoi(argv[i]) <= 0)
+			return (1);
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!(argv[i][j] >= '0' && argv[i][j] <= '9'))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
+}
+
+int	check_args(int argc, char **argv)
+{
+	if (!(argc >= 5 && argc <= 6))
+		return (1);
+	if (is_not_digit(argv))
+		return (1);
+	if (ft_atoi(argv[1]) == 1)
+	{
+		usleep(ft_atoi(argv[3]) * 1000);
+		printf("%d 1 died\n", ft_atoi(argv[2]));
 		return (1);
 	}
-	create_thread(table);
-	free_table(&table);
 	return (0);
 }
