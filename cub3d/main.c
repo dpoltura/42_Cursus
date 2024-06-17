@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:21 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 14:45:27 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/17 15:22:46 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,22 +49,35 @@ int	main(int argc, char **argv)
 		free(data_map);
 		return (ft_error("Can't read map\n"));
 	}
-	if (texture_first(data_map) == 2)
+	if (!data_map->texture_color)
 	{
-		free(data_map);
-		return (ft_error("Can't read texture\n"));
-	}
-	if (!texture_first(data_map))
-	{
-		if (!color_first(data_map))
+		if (!check_texture(data_map))
+		{
+			free(data_map);
+			return (ft_error("Can't read texture\n"));
+		}
+		if (!check_color(data_map))
 		{
 			free(data_map);
 			return (ft_error("Can't read color\n"));
 		}
 	}
+	if (data_map->texture_color)
+	{
+		if (!check_color(data_map))
+		{
+			free(data_map);
+			return (ft_error("Can't read color\n"));
+		}
+		if (!check_texture(data_map))
+		{
+			free(data_map);
+			return (ft_error("Can't read texture\n"));
+		}
+	}
 	
 	close(data_map->fd);
-	free(data_map->line);
+	//free(data_map->line);
 	free(data_map);
 	return (0);
 }
