@@ -6,26 +6,32 @@
 #    By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 12:03:43 by dpoltura          #+#    #+#              #
-#    Updated: 2024/06/17 12:17:49 by dpoltura         ###   ########.fr        #
+#    Updated: 2024/06/17 13:03:32 by dpoltura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc -Wall -Wextra -Werror -g
 
 SRCS =  main.c \
-		utils.c
+		utils.c \
+		parse.c
+
+GNL_SRCS =	get_next_line/get_next_line.c \
+			get_next_line/get_next_line_utils.c
 
 OBJS = $(SRCS:%.c=%.o)
+
+GNL_OBJS = $(GNL_SRCS:%.c=%.o)
 
 NAME = cub3d
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME)
+$(NAME): $(OBJS) $(GNL_OBJS)
+	$(CC) $(OBJS) $(GNL_OBJS) -o $(NAME)
 
 clean:
-	rm $(OBJS)
+	rm $(OBJS) $(GNL_OBJS)
 
 fclean: clean
 	rm $(NAME)
