@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:21 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 13:32:21 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:45:27 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@ int	main(int argc, char **argv)
 	if (!data_map)
 		return (ft_error("Can't allocate memory\n"));
 	if (!ft_read_map(argv[1], data_map))
+	{
+		free(data_map);
 		return (ft_error("Can't read map\n"));
+	}
+	if (texture_first(data_map) == 2)
+	{
+		free(data_map);
+		return (ft_error("Can't read texture\n"));
+	}
+	if (!texture_first(data_map))
+	{
+		if (!color_first(data_map))
+		{
+			free(data_map);
+			return (ft_error("Can't read color\n"));
+		}
+	}
+	
+	close(data_map->fd);
+	free(data_map->line);
+	free(data_map);
 	return (0);
 }

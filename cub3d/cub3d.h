@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:29 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 13:31:24 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:41:02 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,20 @@
 #include "get_next_line/get_next_line.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 /* structs */
 typedef struct s_data_map
 {
 	int	fd;
 	char	*line;
+	bool 	texture_color;
 }	t_data_map;
 
 /* parse.c */
+int	color_first(t_data_map *data_map);
+int	texture_first(t_data_map *data_map);
+int	ft_open_map(char *str, t_data_map *data_map);
 int	ft_read_map(char *str, t_data_map *data_map);
 
 /* utils.c */
