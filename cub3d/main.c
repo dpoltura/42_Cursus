@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:21 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 15:22:46 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:05:57 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int argc, char **argv)
 	}
 	
 	close(data_map->fd);
-	//free(data_map->line);
+	free(data_map->line);
 	free(data_map);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:48:09 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 15:40:51 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:21:04 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ int	check_texture(t_data_map *data_map)
 			|| (data_map->line[i] == 'N' && data_map->line[i + 1] != 'O' && data_map->line[i + 1] != ' ')
 			|| (data_map->line[i] == 'S' && data_map->line[i + 1] != 'O' && data_map->line[i + 1] != ' ')
 			|| (data_map->line[i] == 'W' && data_map->line[i + 1] != 'E' && data_map->line[i + 1] != ' ')
-			|| (data_map->line[i] == 'E' && data_map->line[i + 1] != 'A' && data_map->line[i + 1] != ' '))
+			|| (data_map->line[i] == 'E' && data_map->line[i + 1] != 'A' && data_map->line[i + 1] != ' ')
+			|| (data_map->line[i] == 'N' && data_map->line[i + 1] == 'O' && data_map->line[i + 2] != ' ')
+			|| (data_map->line[i] == 'S' && data_map->line[i + 1] == 'O' && data_map->line[i + 2] != ' ')
+			|| (data_map->line[i] == 'W' && data_map->line[i + 1] == 'E' && data_map->line[i + 2] != ' ')
+			|| (data_map->line[i] == 'E' && data_map->line[i + 1] == 'A' && data_map->line[i + 2] != ' '))
 		{
 			close(data_map->fd);
 			free(data_map->line);

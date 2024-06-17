@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:29 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 15:06:09 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:10:20 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ typedef struct s_data_map
 	int	fd;
 	char	*line;
 	bool 	texture_color;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
+	int		*floor_color;
+	int		*ceiling_color;
 }	t_data_map;
 
 /* parse.c */
