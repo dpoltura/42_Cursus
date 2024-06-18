@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:21 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/18 13:14:19 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:10:05 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,14 @@ int	main(int argc, char **argv)
 		}
 	}
 	init_texture(argv[1], data_map);
-	
+	init_color(argv[1], data_map);
+
+	printf("NO: %s\n", data_map->no_texture);
+	printf("SO: %s\n", data_map->so_texture);
+	printf("WE: %s\n", data_map->we_texture);
+	printf("EA: %s\n", data_map->ea_texture);
+	printf("F: %s\n", data_map->floor_color);
+	printf("C: %s\n", data_map->ceiling_color);
 	
 	close(data_map->fd);
 	free(data_map->line);
