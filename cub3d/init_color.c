@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:48:25 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/18 14:08:26 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:25:07 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static int	is_c_color(char *str, int i, t_data_map *data_map)
 {
 	if (str[i] == 'C')
 	{
+		if (data_map->ceiling_color)
+		{
+			ft_error("Double in color\n");
+			return (0);
+		}
 		i++;
 		while (str[i] && str[i] == ' ')
 			i++;
@@ -34,6 +39,11 @@ static int	is_f_color(char *str, int i, t_data_map *data_map)
 {
 	if (str[i] == 'F')
 	{
+		if (data_map->floor_color)
+		{
+			ft_error("Double in color\n");
+			return (0);
+		}
 		i++;
 		while (str[i] && str[i] == ' ')
 			i++;

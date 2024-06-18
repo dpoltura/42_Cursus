@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 11:14:54 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/18 13:35:36 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/18 14:24:38 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ static int	is_ea_texture(char *str, int i, t_data_map *data_map)
 {
 	if (str[i] == 'E')
 	{
+		if (data_map->ea_texture)
+		{
+			ft_error("Double in texture\n");
+			return (0);
+		}
 		i += 2;
 		while (str[i] && str[i] == ' ')
 			i++;
@@ -34,6 +39,11 @@ static int	is_we_texture(char *str, int i, t_data_map *data_map)
 {
 	if (str[i] == 'W')
 	{
+		if (data_map->we_texture)
+		{
+			ft_error("Double in texture\n");
+			return (0);
+		}
 		i += 2;
 		while (str[i] && str[i] == ' ')
 			i++;
@@ -52,6 +62,11 @@ static int	is_so_texture(char *str, int i, t_data_map *data_map)
 {
 	if (str[i] == 'S')
 	{
+		if (data_map->so_texture)
+		{
+			ft_error("Double in texture\n");
+			return (0);
+		}
 		i += 2;
 		while (str[i] && str[i] == ' ')
 			i++;
@@ -70,6 +85,11 @@ static int	is_no_texture(char *str, int i, t_data_map *data_map)
 {
 	if (str[i] == 'N')
 	{
+		if (data_map->no_texture)
+		{
+			ft_error("Double in texture\n");
+			return (0);
+		}
 		i += 2;
 		while (str[i] && str[i] == ' ')
 			i++;
