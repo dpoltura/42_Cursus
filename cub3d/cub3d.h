@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:29 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/18 11:39:36 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/18 11:46:32 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	ft_open_map(char *str, t_data_map *data_map);
 int	ft_read_map(char *str, t_data_map *data_map);
 
 /* utils.c */
+int		map_is_not_cub(char *str);
+int		ft_error(char *str);
 void	ft_putstr_fd(char *s, int fd);
 char	*ft_strdup(const char *s);
 

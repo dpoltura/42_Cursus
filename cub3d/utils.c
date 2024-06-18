@@ -6,11 +6,30 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:07:58 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/18 11:11:04 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/18 11:46:04 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	map_is_not_cub(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	if (str[i - 1] != 'b' || str[i - 2] != 'u' || str[i - 3] != 'c' || str[i - 4] != '.')
+		return (1);
+	return (0);
+}
+
+int	ft_error(char *str)
+{
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(str, 2);
+	return (1);
+}
 
 void	ft_putstr_fd(char *s, int fd)
 {
