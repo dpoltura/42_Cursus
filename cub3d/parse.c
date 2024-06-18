@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:48:09 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 16:21:04 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/18 11:14:33 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@ int	check_color(t_data_map *data_map)
 	int	i;
 	int	color_nb;
 
-	while (data_map->line[0] == '\n')
-	{
-		free(data_map->line);
-		data_map->line = get_next_line(data_map->fd);
-	}
 	i = 0;
 	color_nb = 0;
 	while (color_nb < 2)
 	{
+		while (data_map->line[0] == '\n')
+		{
+			free(data_map->line);
+			data_map->line = get_next_line(data_map->fd);
+		}
 		while (data_map->line[i] == ' ')
 			i++;
 		if ((data_map->line[i] != 'F' && data_map->line[i] != 'C')
@@ -51,15 +51,15 @@ int	check_texture(t_data_map *data_map)
 	int	i;
 	int	texture_nb;
 
-	while (data_map->line[0] == '\n')
-	{
-		free(data_map->line);
-		data_map->line = get_next_line(data_map->fd);
-	}
 	i = 0;
 	texture_nb = 0;
 	while (texture_nb < 4)
 	{
+		while (data_map->line[0] == '\n')
+		{
+			free(data_map->line);
+			data_map->line = get_next_line(data_map->fd);
+		}
 		while (data_map->line[i] == ' ')
 			i++;
 		if ((data_map->line[i] != 'N' && data_map->line[i] != 'S' && data_map->line[i] != 'W' && data_map->line[i] != 'E')

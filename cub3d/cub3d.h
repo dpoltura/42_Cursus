@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:29 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 16:10:20 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/18 11:39:36 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ typedef struct s_data_map
 	int		*ceiling_color;
 }	t_data_map;
 
+/* init.c */
+void	init_texture(char *str, t_data_map *data_map);
+
 /* parse.c */
 int	check_color(t_data_map *data_map);
 int	check_texture(t_data_map *data_map);
@@ -40,6 +43,7 @@ int	ft_read_map(char *str, t_data_map *data_map);
 
 /* utils.c */
 void	ft_putstr_fd(char *s, int fd);
+char	*ft_strdup(const char *s);
 
 /* main.c */
 int	ft_error(char *str);

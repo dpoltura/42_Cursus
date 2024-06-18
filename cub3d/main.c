@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:21 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/17 16:05:57 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/18 11:43:55 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,14 @@ int	main(int argc, char **argv)
 			return (ft_error("Can't read texture\n"));
 		}
 	}
+	init_texture(argv[1], data_map);
 	
 	close(data_map->fd);
 	free(data_map->line);
+	free(data_map->no_texture);
+	free(data_map->so_texture);
+	free(data_map->we_texture);
+	free(data_map->ea_texture);
 	free(data_map);
 	return (0);
 }
