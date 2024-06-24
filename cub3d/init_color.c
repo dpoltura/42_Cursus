@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:48:25 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/18 14:25:07 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 11:32:12 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_c_color(char *str, int i, t_data_map *data_map)
 {
-	if (str[i] == 'C')
+	if (str && str[i] == 'C')
 	{
 		if (data_map->ceiling_color)
 		{
@@ -37,7 +37,7 @@ static int	is_c_color(char *str, int i, t_data_map *data_map)
 
 static int	is_f_color(char *str, int i, t_data_map *data_map)
 {
-	if (str[i] == 'F')
+	if (str && str[i] == 'F')
 	{
 		if (data_map->floor_color)
 		{
@@ -74,12 +74,12 @@ void	init_color(char *str, t_data_map *data_map)
 	ft_open_map(str, data_map);
 	while (data_map->line)
 	{
-		while (data_map->line[0] == '\n')
+		while (data_map->line && data_map->line[0] == '\n')
 		{
 			free(data_map->line);
 			data_map->line = get_next_line(data_map->fd);
 		}
-		while (data_map->line[i] == ' ')
+		while (data_map->line && data_map->line[i] == ' ')
 			i++;
 		if (!is_f_color(data_map->line, i, data_map))
 			return ;

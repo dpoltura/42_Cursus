@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 11:14:54 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/18 14:24:38 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 11:31:12 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_ea_texture(char *str, int i, t_data_map *data_map)
 {
-	if (str[i] == 'E')
+	if (str && str[i] == 'E')
 	{
 		if (data_map->ea_texture)
 		{
@@ -37,7 +37,7 @@ static int	is_ea_texture(char *str, int i, t_data_map *data_map)
 
 static int	is_we_texture(char *str, int i, t_data_map *data_map)
 {
-	if (str[i] == 'W')
+	if (str && str[i] == 'W')
 	{
 		if (data_map->we_texture)
 		{
@@ -60,7 +60,7 @@ static int	is_we_texture(char *str, int i, t_data_map *data_map)
 
 static int	is_so_texture(char *str, int i, t_data_map *data_map)
 {
-	if (str[i] == 'S')
+	if (str && str[i] == 'S')
 	{
 		if (data_map->so_texture)
 		{
@@ -83,7 +83,7 @@ static int	is_so_texture(char *str, int i, t_data_map *data_map)
 
 static int	is_no_texture(char *str, int i, t_data_map *data_map)
 {
-	if (str[i] == 'N')
+	if (str && str[i] == 'N')
 	{
 		if (data_map->no_texture)
 		{
@@ -122,12 +122,12 @@ void	init_texture(char *str, t_data_map *data_map)
 	ft_open_map(str, data_map);
 	while (data_map->line)
 	{
-		while (data_map->line[0] == '\n')
+		while (data_map->line && data_map->line[0] == '\n')
 		{
 			free(data_map->line);
 			data_map->line = get_next_line(data_map->fd);
 		}
-		while (data_map->line[i] == ' ')
+		while (data_map->line && data_map->line[i] == ' ')
 			i++;
 		if (!is_no_texture(data_map->line, i, data_map))
 			return ;
