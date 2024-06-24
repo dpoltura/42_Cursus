@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:21 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/24 13:26:53 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 13:55:18 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	main(int argc, char **argv)
 	printf("%s\n", data_map->floor_color);
 	printf("%s\n", data_map->ceiling_color);
 
-	if (!map_exist(argv[1], data_map))
+	if (!map_exist(argv[1], data_map) || !map_is_closed(data_map)
+		|| !map_is_well_spaced(data_map) || !check_map_char(data_map))
 	{
 		close(data_map->fd);
 		free(data_map->line);
@@ -85,25 +86,6 @@ int	main(int argc, char **argv)
 		free(data_map);
 		return (ft_error("Invalid map\n"));
 	}
-	if (!map_is_closed(data_map) || !map_is_well_spaced(data_map))
-	{
-		close(data_map->fd);
-		free(data_map->line);
-		free(data_map->no_texture);
-		free(data_map->so_texture);
-		free(data_map->we_texture);
-		free(data_map->ea_texture);
-		free(data_map->floor_color);
-		free(data_map->ceiling_color);
-		int i = 0;
-		while (data_map->map && data_map->map[i])
-		{
-			free(data_map->map[i]);
-			i++;
-		}
-		free(data_map);
-		return (ft_error("Map is not closed\n"));
-	}
 	if (!not_double_player(data_map))
 	{
 		close(data_map->fd);
@@ -121,7 +103,7 @@ int	main(int argc, char **argv)
 			i++;
 		}
 		free(data_map);
-		return (ft_error("Double player\n"));
+		return (ft_error("Not one player\n"));
 	}
 	
 	int i = 0;

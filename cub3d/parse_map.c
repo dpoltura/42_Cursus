@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:14:27 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/24 13:18:36 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 13:54:53 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,30 @@ static void	map_to_data(t_data_map *data_map)
 	}
 	data_map->map[j] = ft_strdup(data_map->line);
 	j++;
+}
+
+int	check_map_char(t_data_map *data_map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (data_map->map[j])
+	{
+		while (data_map->map[j][i])
+		{
+			if (data_map->map[j][i] != '0' && data_map->map[j][i] != '1'
+				&& data_map->map[j][i] != 'N' && data_map->map[j][i] != 'S'
+				&& data_map->map[j][i] != 'W' && data_map->map[j][i] != 'E'
+				&& data_map->map[j][i] != ' ' && data_map->map[j][i] != '\n')
+				return (0);
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+	return (1);
 }
 
 int	not_double_player(t_data_map *data_map)
