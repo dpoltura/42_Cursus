@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:07:58 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/18 11:46:04 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:12:46 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,28 @@ int	map_is_not_cub(char *str)
 	return (0);
 }
 
-int	ft_error(char *str)
+int	ft_error(char *str, t_data_map *data_map)
 {
+	int i;
+
+	i = 0;
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(str, 2);
+	close(data_map->fd);
+	free(data_map->line);
+	free(data_map->no_texture);
+	free(data_map->so_texture);
+	free(data_map->we_texture);
+	free(data_map->ea_texture);
+	free(data_map->floor_color);
+	free(data_map->ceiling_color);
+	i = 0;
+	while (data_map->map[i])
+	{
+		free(data_map->map[i]);
+		i++;
+	}
+	free(data_map);
 	return (1);
 }
 

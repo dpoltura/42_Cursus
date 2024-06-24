@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 11:14:54 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/24 11:31:12 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:08:32 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	is_ea_texture(char *str, int i, t_data_map *data_map)
 	{
 		if (data_map->ea_texture)
 		{
-			ft_error("Double in texture\n");
+			ft_error("Double in texture\n", data_map);
 			return (0);
 		}
 		i += 2;
@@ -28,7 +28,7 @@ static int	is_ea_texture(char *str, int i, t_data_map *data_map)
 			data_map->ea_texture = ft_strdup(&str[i]);
 		else
 		{
-			ft_error("Can't read texture\n");
+			ft_error("Can't read texture\n", data_map);
 			return (0);
 		}
 	}
@@ -41,7 +41,7 @@ static int	is_we_texture(char *str, int i, t_data_map *data_map)
 	{
 		if (data_map->we_texture)
 		{
-			ft_error("Double in texture\n");
+			ft_error("Double in texture\n", data_map);
 			return (0);
 		}
 		i += 2;
@@ -51,7 +51,7 @@ static int	is_we_texture(char *str, int i, t_data_map *data_map)
 			data_map->we_texture = ft_strdup(&str[i]);
 		else
 		{
-			ft_error("Can't read texture\n");
+			ft_error("Can't read texture\n", data_map);
 			return (0);
 		}
 	}
@@ -64,7 +64,7 @@ static int	is_so_texture(char *str, int i, t_data_map *data_map)
 	{
 		if (data_map->so_texture)
 		{
-			ft_error("Double in texture\n");
+			ft_error("Double in texture\n", data_map);
 			return (0);
 		}
 		i += 2;
@@ -74,7 +74,7 @@ static int	is_so_texture(char *str, int i, t_data_map *data_map)
 			data_map->so_texture = ft_strdup(&str[i]);
 		else
 		{
-			ft_error("Can't read texture\n");
+			ft_error("Can't read texture\n", data_map);
 			return (0);
 		}
 	}
@@ -87,7 +87,7 @@ static int	is_no_texture(char *str, int i, t_data_map *data_map)
 	{
 		if (data_map->no_texture)
 		{
-			ft_error("Double in texture\n");
+			ft_error("Double in texture\n", data_map);
 			return (0);
 		}
 		i += 2;
@@ -97,7 +97,7 @@ static int	is_no_texture(char *str, int i, t_data_map *data_map)
 			data_map->no_texture = ft_strdup(&str[i]);
 		else
 		{
-			ft_error("Can't read texture\n");
+			ft_error("Can't read texture\n", data_map);
 			return (0);
 		}
 	}
@@ -143,5 +143,5 @@ void	init_texture(char *str, t_data_map *data_map)
 	}
 	if (!data_map->no_texture || !data_map->so_texture
 		|| !data_map->we_texture || !data_map->ea_texture)
-		ft_error("Double in texture\n");
+		ft_error("Double in texture\n", data_map);
 }

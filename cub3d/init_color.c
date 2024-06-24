@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 12:48:25 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/24 11:32:12 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 14:07:46 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	is_c_color(char *str, int i, t_data_map *data_map)
 	{
 		if (data_map->ceiling_color)
 		{
-			ft_error("Double in color\n");
+			ft_error("Double in color\n", data_map);
 			return (0);
 		}
 		i++;
@@ -28,7 +28,7 @@ static int	is_c_color(char *str, int i, t_data_map *data_map)
 			data_map->ceiling_color = ft_strdup(&str[i]);
 		else
 		{
-			ft_error("Can't read color\n");
+			ft_error("Can't read color\n", data_map);
 			return (0);
 		}
 	}
@@ -41,7 +41,7 @@ static int	is_f_color(char *str, int i, t_data_map *data_map)
 	{
 		if (data_map->floor_color)
 		{
-			ft_error("Double in color\n");
+			ft_error("Double in color\n", data_map);
 			return (0);
 		}
 		i++;
@@ -51,7 +51,7 @@ static int	is_f_color(char *str, int i, t_data_map *data_map)
 			data_map->floor_color = ft_strdup(&str[i]);
 		else
 		{
-			ft_error("Can't read color\n");
+			ft_error("Can't read color\n", data_map);
 			return (0);
 		}
 	}
@@ -90,5 +90,5 @@ void	init_color(char *str, t_data_map *data_map)
 		i = 0;
 	}
 	if (!data_map->floor_color || !data_map->ceiling_color)
-		ft_error("Double in color\n");
+		ft_error("Double in color\n", data_map);
 }
