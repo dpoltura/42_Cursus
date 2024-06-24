@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 14:14:27 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/24 12:42:27 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 13:18:36 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,75 @@ static void	map_to_data(t_data_map *data_map)
 	}
 	data_map->map[j] = ft_strdup(data_map->line);
 	j++;
+}
+
+int	not_double_player(t_data_map *data_map)
+{
+	int	i;
+	int	j;
+	int	player;
+
+	i = 0;
+	j = 0;
+	player = 0;
+	while (data_map->map[j])
+	{
+		while (data_map->map[j][i])
+		{
+			if (data_map->map[j][i] == 'N' || data_map->map[j][i] == 'S'
+				|| data_map->map[j][i] == 'W' || data_map->map[j][i] == 'E')
+				player++;
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+	if (player != 1)
+		return (0);
+	return (1);
+}
+
+int	map_is_well_spaced(t_data_map *data_map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (data_map->map[j])
+	{
+		while (data_map->map[j][i])
+		{
+			if (data_map->map[j][i] == '0')
+			{
+				if (data_map->map[j][i - 1] != 'N' && data_map->map[j][i - 1] != 'S'
+					&& data_map->map[j][i - 1] != 'W' && data_map->map[j][i - 1] != 'E'
+					&& data_map->map[j][i + 1] != 'N' && data_map->map[j][i + 1] != 'S'
+					&& data_map->map[j][i + 1] != 'W' && data_map->map[j][i + 1] != 'E'
+					&& data_map->map[j + 1] && data_map->map[j + 1][i] != 'N' && data_map->map[j + 1][i] != 'S'
+					&& data_map->map[j + 1][i] != 'W' && data_map->map[j + 1][i] != 'E'
+					&& j && data_map->map[j - 1][i] != 'N' && data_map->map[j - 1][i] != 'S'
+					&& data_map->map[j - 1][i] != 'W' && data_map->map[j - 1][i] != 'E'
+					&& ((data_map->map[j][i + 1] != '0' && data_map->map[j][i + 1] != '1')
+					|| (data_map->map[j + 1] && data_map->map[j + 1][i] != '0' && data_map->map[j + 1][i] != '1')
+					|| (j && data_map->map[j - 1][i] != '0' && data_map->map[j - 1][i] != '1')))
+					return (0);
+			}
+			else if (data_map->map[j][i] == 'N' || data_map->map[j][i] == 'S'
+					|| data_map->map[j][i] == 'W' || data_map->map[j][i] == 'E')
+			{
+				if ((data_map->map[j][i - 1] != '0' && data_map->map[j][i - 1] != '1')
+					|| (data_map->map[j][i + 1] != '0' && data_map->map[j][i + 1] != '1')
+					|| (data_map->map[j + 1] && data_map->map[j + 1][i] != '0' && data_map->map[j + 1][i] != '1')
+					|| (j && data_map->map[j - 1][i] != '0' && data_map->map[j - 1][i] != '1'))
+					return (0);
+			}
+			i++;
+		}
+		i = 0;
+		j++;
+	}
+	return (1);
 }
 
 int	map_is_closed(t_data_map *data_map)

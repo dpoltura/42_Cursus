@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:29 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/24 12:30:06 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/24 13:18:47 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_data_map
 }	t_data_map;
 
 /* parse_map.c */
+int	not_double_player(t_data_map *data_map);
+int	map_is_well_spaced(t_data_map *data_map);
 int	map_is_closed(t_data_map *data_map);
 int	map_exist(char *str, t_data_map *data_map);
 
