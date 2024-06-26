@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:07:58 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/26 14:02:54 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:11:17 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	ft_error(char *str, t_data_map *data_map)
 		exit(EXIT_SUCCESS);
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(str, 2);
-	close(data_map->fd);
+	if (data_map->fd >= 0)
+		close(data_map->fd);
 	free(data_map->line);
 	free(data_map->no_texture);
 	free(data_map->so_texture);

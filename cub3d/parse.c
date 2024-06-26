@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:48:09 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/26 14:01:23 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:12:33 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_open_map(char *str, t_data_map *data_map)
 		close(data_map->fd);
 		ft_error("Can't open map\n", data_map);
 	}
+	free(data_map->line);
 	data_map->line = get_next_line(data_map->fd);
 }
 
