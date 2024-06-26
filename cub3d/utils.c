@@ -6,29 +6,42 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:07:58 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/24 14:12:46 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/26 14:02:54 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	map_is_not_cub(char *str)
+void	go_to_eof(char *str, t_data_map *data_map)
 {
-	int i;
+	while (data_map->line)
+	{
+		free(data_map->line);
+		data_map->line = get_next_line(data_map->fd);
+	}
+	close(data_map->fd);
+	ft_open_map(str, data_map);
+}
+
+void	map_is_not_cub(char *str, t_data_map *data_map)
+{
+	int	i;
 
 	i = 0;
 	while (str[i])
 		i++;
-	if (str[i - 1] != 'b' || str[i - 2] != 'u' || str[i - 3] != 'c' || str[i - 4] != '.')
-		return (1);
-	return (0);
+	if (str[i - 1] != 'b' || str[i - 2] != 'u' || str[i - 3] != 'c' || str[i
+			- 4] != '.')
+		ft_error("Map is not .cub\n", data_map);
 }
 
-int	ft_error(char *str, t_data_map *data_map)
+void	ft_error(char *str, t_data_map *data_map)
 {
-	int i;
+	int	i;
 
 	i = 0;
+	if (!str)
+		exit(EXIT_SUCCESS);
 	ft_putstr_fd("Error\n", 2);
 	ft_putstr_fd(str, 2);
 	close(data_map->fd);
@@ -40,13 +53,13 @@ int	ft_error(char *str, t_data_map *data_map)
 	free(data_map->floor_color);
 	free(data_map->ceiling_color);
 	i = 0;
-	while (data_map->map[i])
+	while (data_map->map && data_map->map[i])
 	{
 		free(data_map->map[i]);
 		i++;
 	}
 	free(data_map);
-	return (1);
+	exit(EXIT_FAILURE);
 }
 
 void	ft_putstr_fd(char *s, int fd)

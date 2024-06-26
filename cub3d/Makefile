@@ -6,7 +6,7 @@
 #    By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 12:03:43 by dpoltura          #+#    #+#              #
-#    Updated: 2024/06/26 12:22:34 by dpoltura         ###   ########.fr        #
+#    Updated: 2024/06/26 13:59:41 by dpoltura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ SRCS =  main.c \
 		parse.c \
 		init_texture.c \
 		init_color.c \
-		parse_map.c
+		parse_map.c \
+		parse_map_bis.c
 
 GNL_SRCS =	get_next_line/get_next_line.c \
 			get_next_line/get_next_line_utils.c
