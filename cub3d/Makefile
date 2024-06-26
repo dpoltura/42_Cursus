@@ -6,7 +6,7 @@
 #    By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 12:03:43 by dpoltura          #+#    #+#              #
-#    Updated: 2024/06/26 11:58:22 by dpoltura         ###   ########.fr        #
+#    Updated: 2024/06/26 12:22:34 by dpoltura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,17 +26,19 @@ OBJS = $(SRCS:%.c=%.o)
 
 GNL_OBJS = $(GNL_SRCS:%.c=%.o)
 
-NAME = cub3d
+MLX_DIR = minilibx-linux
+MLX_LIB = $(MLX_DIR)/libmlx.a
 
-mlx:
-	$(MAKE) -C ./minilibx-linux
+NAME = cub3d
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(GNL_OBJS)
-	$(CC) $(OBJS) $(GNL_OBJS) -o $(NAME)
+	make -C $(MLX_DIR)
+	$(CC) $(OBJS) $(GNL_OBJS) -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -o $(NAME)
 
 clean:
+	make clean -C $(MLX_DIR)
 	rm $(OBJS) $(GNL_OBJS)
 
 fclean: clean
