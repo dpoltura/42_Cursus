@@ -6,7 +6,7 @@
 /*   By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 12:05:29 by dpoltura          #+#    #+#             */
-/*   Updated: 2024/06/24 14:05:53 by dpoltura         ###   ########.fr       */
+/*   Updated: 2024/06/26 11:52:51 by dpoltura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define CUB3D_H
 
 #include "get_next_line/get_next_line.h"
+#include "minilibx-linux/mlx.h"
+#include "minilibx-linux/mlx_int.h"
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdbool.h>

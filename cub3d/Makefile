@@ -6,7 +6,7 @@
 #    By: dpoltura <dpoltura@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/17 12:03:43 by dpoltura          #+#    #+#              #
-#    Updated: 2024/06/24 13:44:45 by dpoltura         ###   ########.fr        #
+#    Updated: 2024/06/26 11:58:22 by dpoltura         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,9 @@ OBJS = $(SRCS:%.c=%.o)
 GNL_OBJS = $(GNL_SRCS:%.c=%.o)
 
 NAME = cub3d
+
+mlx:
+	$(MAKE) -C ./minilibx-linux
 
 all: $(NAME)
 
